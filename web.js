@@ -5,9 +5,9 @@ var app = express.createServer(express.logger());
 
 
 app.get('/', function(request, response) {
-  fs.readFileSync('index.html', function (err, data) {
+  fs.readFileSync('index.html', 'utf8', function (err, data) {
     if (err) throw err;
-    buf = new Buffer(256);
+    buf = new Buffer(512);
     len = buf.write(data, 0);
     var dec_data = buf.toString('utf8', 0, len);
     console.log(len + " bytes: " + dec_data);
