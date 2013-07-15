@@ -7,8 +7,11 @@ var app = express.createServer(express.logger());
 app.get('/', function(request, response) {
   fs.readFileSync('index.html', function (err, data) {
     if (err) throw err;
-    console.log(data);
-    response.send(data);
+    buf = new Buffer(256);
+    len = buf.write(data, 0);
+    var dec_data = buf.toString('utf8', 0, len);
+    console.log(len + " bytes: " + dec_data);
+    response.send(dec_data);
   });
 });
 
